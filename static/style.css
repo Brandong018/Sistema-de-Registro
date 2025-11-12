@@ -213,3 +213,20 @@ form button {
 form button:hover {
   background-color: #e68fe8;
 }
+
+.btn-logout-abajo {
+    display: inline-block;
+    background-color: #f06b6b;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+}
+
+.btn-logout-abajo:hover {
+    background-color: #d9534f;
+    transform: scale(1.05);
+}
