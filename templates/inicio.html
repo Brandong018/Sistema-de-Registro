@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Víveres - Asilo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🏠 Registro de Víveres — Casa de los Ancianos Papa Francisco</h1>
+    </header>
+
+    <section class="form-section">
+        <h2>Agregar nuevo registro</h2>
+        <form action="{{ url_for('agregar') }}" method="POST">
+            <input type="text" name="id" placeholder="ID" required>
+            <input type="text" name="nombre" placeholder="Nombre del donante o responsable" required>
+            <label>Fecha de Entrega:</label>
+            <input type="date" name="fecha_entrega" required>
+            <input type="text" name="producto" placeholder="Producto donado" required>
+            <input type="number" name="cantidad" placeholder="Cantidad" required>
+            <label>Fecha de Vencimiento:</label>
+            <input type="date" name="fecha_vencimiento" required>
+            <input type="text" name="bienes" placeholder="Tipo de bien (alimento, artículo de limpieza, etc.)" required>
+            <label>Estado del producto:</label>
+            <select name="utilidad" required>
+                <option value="Buen estado">Buen estado</option>
+                <option value="Mal estado">Mal estado</option>
+            </select>
+            <button type="submit">Agregar</button>
+        </form>
+    </section>
+
+    <section class="table-section">
+        <h2>Listado de víveres registrados</h2>
+        {% if viveres %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Fecha de Entrega</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Fecha de Vencimiento</th>
+                <th>Bienes</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            {% for v in viveres %}
+            <tr>
+                <td>{{ v.id }}</td>
+                <td>{{ v.nombre }}</td>
+                <td>{{ v.fecha_entrega }}</td>
+                <td>{{ v.producto }}</td>
+                <td>{{ v.cantidad }}</td>
+                <td>{{ v.fecha_vencimiento }}</td>
+                <td>{{ v.bienes }}</td>
+                <td>{{ v.utilidad }}</td>
+                <td>
+                    <a href="/editar/{{ v.id }}" class="btn-editar">Editar</a>
+                    <a href="/eliminar/{{ v.id }}" class="btn-borrar">Borrar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No hay víveres registrados aún.</p>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>Desarrollado para el Asilo Casa de los Ancianos Papa Francisco — Proyecto Universitario</p>
+    </footer>
+</body>
+</html>
